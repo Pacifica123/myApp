@@ -2,12 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>MyApp</title>
+  <title>MyApp {{title}}</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+  <script>
+    // ------------------------------------------
+    function displayWeatherData(data) {
+      var weatherList = document.getElementById('weatherList');
+      weatherList.innerHTML = ''; // Clear previous data
+
+      // Display current data
+      var currentData = data;
+      var currentDataItem = document.createElement('div');
+      currentDataItem.innerHTML = `
+          <h3>Current Data:</h3>
+          <ul>
+              <li style="list-style-type: none">Current Temperature: ${currentData["Current temperature_2m"]}°C</li>
+              <li style="list-style-type: none">Current Apparent Temperature: ${currentData["Current apparent_tempera8ture"]}°C</li>
+          </ul>
+      `;
+      weatherList.appendChild(currentDataItem);
+
+      // Display daily data
+      var dailyData = data.data_daily[0];
+      var dailyDataItem = document.createElement('div');
+      dailyDataItem.innerHTML = `
+          <h3>Daily Data:</h3>
+          <ul>
+              <li style="list-style-type: none">Max Temperature: ${dailyData.temperature_2m_max[0][0]}°C</li>
+              <li style="list-style-type: none">Daylight Duration: ${dailyData.daylight_duration[0][0]} seconds</li>
+          </ul>
+      `;
+      weatherList.appendChild(dailyDataItem);
+
+      // Extracting hourly data
+      var hourlyData = data.data_hourly[0];
+
+      for (var i = 0; i < hourlyData.temperature_2m[0].length; i++) {
+          var listItem = document.createElement('div');
+          listItem.innerHTML = `
+              <strong>Hour ${i + 1}:</strong>
+              <ul >
+                  <li style="list-style-type: none" >Temperature: ${hourlyData.temperature_2m[0][i]}°C</li>
+                  <li style="list-style-type: none">Humidity: ${hourlyData.relative_humidity_2m[0][i]}%</li>
+                  <li style="list-style-type: none">Apparent Temperature: ${hourlyData.apparent_temperature[0][i]}°C</li>
+                  <li style="list-style-type: none">Precipitation Probability: ${hourlyData.precipitation_probability[0][i]}</li>
+                  <li style="list-style-type: none">Precipitation: ${hourlyData.precipitation[0][i]}mm</li>
+                  <li style="list-style-type: none">Weather Code: ${hourlyData.weather_code[0][i]}</li>
+                  <li style="list-style-type: none">Visibility: ${hourlyData.visibility[0][i]}m</li>
+                  <li style="list-style-type: none">Wind Speed: ${hourlyData.wind_speed_10m[0][i]}m/s</li>
+                  <li style="list-style-type: none">Wind Gusts: ${hourlyData.wind_gusts_10m[0][i]}m/s</li>
+              </ul>
+          `;
+          weatherList.appendChild(listItem);
+      }
+
+      
+    }
+    //-----------------------------------------------------------
+    document.addEventListener("DOMContentLoaded", function(event) { 
+      // Получаем значение из поля ввода
+      var city = document.querySelector('input[type="text"]').value;
+  
+      // Отправляем запрос
+      fetch("http://pacificaprogram.pythonanywhere.com/polls/get-weather/" + city)
+        .then(response => response.json())
+        .then(data => {
+          // Выводим полученные данные в консоль
+          console.log(data);
+          displayWeatherData(data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    });
+  </script>
   <app-root></app-root>
 </body>
 </html>
