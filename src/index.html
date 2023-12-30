@@ -23,8 +23,8 @@
       var currentData = data;
       var currentDataItem = document.createElement('div');
       currentDataItem.innerHTML = `
-          <h3>Сейчас:</h3>
-          <ul>
+          <h3 style="font-size: 25px">Сейчас:</h3>
+          <ul style="font-size: 20px">
               <li style="list-style-type: none">Current Temperature: ${currentData["Current temperature_2m"]}°C</li>
               <li style="list-style-type: none">Current Apparent Temperature: ${currentData["Current apparent_tempera8ture"]}°C</li>
           </ul>
@@ -40,8 +40,8 @@
       minutes = Math.floor((daylight_duration % 3600) / 60)
       seconds = Math.floor(daylight_duration % 60)
       dailyDataItem.innerHTML = `
-          <h3>За день в общем:</h3>
-          <ul>
+          <h3 style="font-size: 20px">За день в общем:</h3>
+          <ul style="font-size: 15px">
               <li style="list-style-type: none">Максимальная температура: ${data.temperature_2m_max}°C</li>
               <li style="list-style-type: none">Продолжительность дня: ${hours}ч ${minutes}м ${seconds}с</li>
           </ul>
