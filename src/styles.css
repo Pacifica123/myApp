@@ -1,5 +1,5 @@
 body{
-    background-image: url('/assets/background.jpg');
+    background-image: url('/assets/darkWinter.png');
     background-size: 100% 100%;
     background-attachment: fixed;
     background-clip: content-box;
@@ -9,4 +9,5 @@ body{
     min-height: 100%;
     background-repeat: no-repeat;
     overflow-x: hidden;
+    color: #ffffff;
 }

@@ -11,50 +11,79 @@
   <script>
     // ------------------------------------------
     function displayWeatherData(data) {
+      var currentWeatherList = document.getElementById('currentWeather');
+      var dailyWeatherList = document.getElementById('dailyWeather');
       var weatherList = document.getElementById('weatherList');
       weatherList.innerHTML = ''; // Clear previous data
+      dailyWeatherList.innerHTML = '';
+      currentWeatherList.innerHTML = '';
+
 
       // Display current data
       var currentData = data;
       var currentDataItem = document.createElement('div');
       currentDataItem.innerHTML = `
-          <h3>Current Data:</h3>
+          <h3>Сейчас:</h3>
           <ul>
               <li style="list-style-type: none">Current Temperature: ${currentData["Current temperature_2m"]}°C</li>
               <li style="list-style-type: none">Current Apparent Temperature: ${currentData["Current apparent_tempera8ture"]}°C</li>
           </ul>
       `;
-      weatherList.appendChild(currentDataItem);
+      currentWeatherList.appendChild(currentDataItem);
 
       // Display daily data
-      var dailyData = data.data_daily[0];
+      // var dailyData = data.data_daily;
       var dailyDataItem = document.createElement('div');
+      daylight_duration = data.daylight_duration
+
+      hours = Math.floor(daylight_duration / 3600)
+      minutes = Math.floor((daylight_duration % 3600) / 60)
+      seconds = Math.floor(daylight_duration % 60)
       dailyDataItem.innerHTML = `
-          <h3>Daily Data:</h3>
+          <h3>За день в общем:</h3>
           <ul>
-              <li style="list-style-type: none">Max Temperature: ${dailyData.temperature_2m_max[0][0]}°C</li>
-              <li style="list-style-type: none">Daylight Duration: ${dailyData.daylight_duration[0][0]} seconds</li>
+              <li style="list-style-type: none">Максимальная температура: ${data.temperature_2m_max}°C</li>
+              <li style="list-style-type: none">Продолжительность дня: ${hours}ч ${minutes}м ${seconds}с</li>
           </ul>
       `;
-      weatherList.appendChild(dailyDataItem);
+      dailyWeatherList.appendChild(dailyDataItem);
+
+      // Display hourly headers
+      var hourlyHeaders = document.createElement('div');
+      hourlyHeaders.innerHTML = `
+          <h3>Почасовые данные:</h3>
+          <ul style="white-space: nowrap; line-height: 20pt">
+              <li style="list-style-type: none; ">Температура</li>
+              <li style="list-style-type: none; ">Влажность</li>
+              <li style="list-style-type: none; ">Ощущаемая t</li>
+              <li style="list-style-type: none; ">Вероятность осадков</li>
+              <li style="list-style-type: none; ">Precipitation</li>
+              <li style="list-style-type: none">W-Code</li>
+              <li style="list-style-type: none">Visibility</li>
+              <li style="list-style-type: none">Wind Speed</li>
+              <li style="list-style-type: none">Wind Gusts</li>
+          </ul>
+      `;
+      weatherList.appendChild(hourlyHeaders);
 
       // Extracting hourly data
-      var hourlyData = data.data_hourly[0];
+      var hourlyData = data.data_hourly;
 
-      for (var i = 0; i < hourlyData.temperature_2m[0].length; i++) {
+      for (var i = 0; i < hourlyData.temperature_2m.length; i++) {
           var listItem = document.createElement('div');
           listItem.innerHTML = `
-              <strong>Hour ${i + 1}:</strong>
-              <ul >
-                  <li style="list-style-type: none" >Temperature: ${hourlyData.temperature_2m[0][i]}°C</li>
-                  <li style="list-style-type: none">Humidity: ${hourlyData.relative_humidity_2m[0][i]}%</li>
-                  <li style="list-style-type: none">Apparent Temperature: ${hourlyData.apparent_temperature[0][i]}°C</li>
-                  <li style="list-style-type: none">Precipitation Probability: ${hourlyData.precipitation_probability[0][i]}</li>
-                  <li style="list-style-type: none">Precipitation: ${hourlyData.precipitation[0][i]}mm</li>
-                  <li style="list-style-type: none">Weather Code: ${hourlyData.weather_code[0][i]}</li>
-                  <li style="list-style-type: none">Visibility: ${hourlyData.visibility[0][i]}m</li>
-                  <li style="list-style-type: none">Wind Speed: ${hourlyData.wind_speed_10m[0][i]}m/s</li>
-                  <li style="list-style-type: none">Wind Gusts: ${hourlyData.wind_gusts_10m[0][i]}m/s</li>
+      
+              <strong style="margin-left: 30px; ">     ${i + 1}-й час</strong>
+              <ul style="margin-top: 37px">
+                  <li style="list-style-type: none; line-height: 20pt" > ${hourlyData.temperature_2m[i]}°C</li>
+                  <li style="list-style-type: none; line-height: 20pt"> ${hourlyData.relative_humidity_2m[i]}%</li>
+                  <li style="list-style-type: none; line-height: 20pt"> ${hourlyData.apparent_temperature[i]}°C</li>
+                  <li style="list-style-type: none; line-height: 20pt"> ${hourlyData.precipitation_probability[i]}</li>
+                  <li style="list-style-type: none; line-height: 20pt"> ${hourlyData.precipitation[i]}mm</li>
+                  <li style="list-style-type: none; line-height: 20pt"> ${hourlyData.weather_code[i]}</li>
+                  <li style="list-style-type: none; line-height: 20pt"> ${hourlyData.visibility[i]}m</li>
+                  <li style="list-style-type: none; line-height: 20pt"> ${hourlyData.wind_speed_10m[i]}m/s</li>
+                  <li style="list-style-type: none; line-height: 20pt"> ${hourlyData.wind_gusts_10m[i]}m/s</li>
               </ul>
           `;
           weatherList.appendChild(listItem);
@@ -65,19 +94,35 @@
     //-----------------------------------------------------------
     document.addEventListener("DOMContentLoaded", function(event) { 
       // Получаем значение из поля ввода
-      var city = document.querySelector('input[type="text"]').value;
+      var input = document.querySelector('input[type="text"]');
   
-      // Отправляем запрос
-      fetch("http://pacificaprogram.pythonanywhere.com/polls/get-weather/" + city)
-        .then(response => response.json())
-        .then(data => {
-          // Выводим полученные данные в консоль
-          console.log(data);
-          displayWeatherData(data);
-        })
-        .catch(error => {
-          console.error(error);
+      // Функция для выполнения запроса на погоду
+      function fetchWeatherData() {
+        var city = input.value;
+        fetch("http://pacificaprogram.pythonanywhere.com/polls/get-weather/" + city)
+          .then(response => response.json())
+          .then(data => {
+            // Выводим полученные данные в консоль
+            console.log(city);
+            console.log(data);
+            displayWeatherData(data);
+          })
+          .catch(error => {
+            console.error(error);
         });
+      }
+
+      fetchWeatherData();
+      setInterval(fetchWeatherData, 5000);
+
+      // Обработчик события "keydown" на поле ввода
+      input.addEventListener("keydown", function(event) {
+        // Проверяем, нажата ли клавиша "Enter"
+        if (event.keyCode === 13) {
+          event.preventDefault(); // Отменяем стандартное действие для клавиши "Enter"
+          fetchWeatherData(); // Выполняем запрос на погоду
+        }
+      });
     });
   </script>
   <app-root></app-root>
