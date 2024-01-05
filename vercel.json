@@ -1,20 +1,8 @@
 {
-    "version": 2,
-    "build": "npm run build",
-    "start": "npm run start",
-    "assets": [
-      "src/favicon.ico",
-      "src/assets"
-    ],
-    "extraAssets": [
-      "dist/**/*.{js,css}"
-    ],
-    "serverRuntimeConfigs": {
-      "next.config.js": {
-        "publicRuntimeConfig": {
-          "path": "/web_part/"
-        }
-      }
-    }
+    "rewrites": [
+      { "source": "/polls/get-weather", "destination": "https://pacificaprogram.pythonanywhere.com/polls/get-weather" },
+      { "source": "/polls/get-weather-week", "destination": "https://pacificaprogram.pythonanywhere.com/polls/get-weather-week" },
+      { "source": "/(.*)", "destination": "/web_part/index.html" }
+    ]
   }
   
