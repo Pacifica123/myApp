@@ -22,24 +22,6 @@
         ]
       },
       {
-        "source": "/web_part/(.*)\\.js",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "application/javascript"
-          }
-        ]
-      },
-      {
-        "source": "/web_part/(.*)\\.css",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "text/css"
-          }
-        ]
-      },
-      {
         "source": "/src/assets/js/(.*)\\.js",
         "headers": [
           {
@@ -61,7 +43,7 @@
     "rewrites": [
       {
         "source": "/(.*)",
-        "destination": "/web_part/index.html"
+        "destination": "/index.html"
       }
     ]
   }
