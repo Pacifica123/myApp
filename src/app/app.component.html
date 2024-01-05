@@ -15,8 +15,9 @@
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    
+
   }
+
 
   h1,
   h2,
@@ -100,8 +101,8 @@
   .card {
     all: unset;
     border-radius: 4px;
-    border: 1px solid #eee;
-    background-color: #c3f4ff86;
+    border: 1px solid #00a2ff;
+    background-color: #1e6e8086;
     height: 40px;
     width: 200px;
     margin: 0 8px 16px;
@@ -119,11 +120,12 @@
   }
 
   .card.card-small {
-    height: 32px;
-    width: 200px;
-    color: #000;
+    height: 64px;
+    width: 250px;
+    color: #ffffff;
     font-weight: bold;
   }
+
 
   .card-container .card:not(.highlight-card) {
     cursor: pointer;
@@ -282,7 +284,7 @@
 
   .right_container{
     position:relative;
-    margin-top: 50%;
+    margin-top: 20%;
     padding: 50px;
     /* margin-right: 10px; */
   }
@@ -355,8 +357,8 @@
   .currentWeather{
     background-color: #00aeff54;
     backdrop-filter: blur(5px);
-    width: max-content;
-    padding: 10px;
+    width: 400px;
+    padding: 15px;
     box-shadow: #1976d2 0 0 10px 0;
   }
   /* ------------------------------- */
@@ -420,10 +422,10 @@
 
   .dailySubTitle{
     text-align: center; 
-    color: #70d2ff; 
-    font-size: 70pt; 
-    margin-top: 100px; 
-    margin-left: 500px;
+    color: #ffffff; 
+    font-size: 65pt; 
+    margin-top: 200px; 
+    margin-left: 40%;
     position: absolute;
     font-weight:lighter;
   }
@@ -455,8 +457,9 @@
   <div class="global_grid">
     <div class="left_container">
       <!-- ДЕНЬ -->
-      <h2 class="dailySubTitle"> На сегодня </h2>
-    
+      <h2 class="dailySubTitle"> На сегодня <span id="currentDate"></span></h2>
+      
+
       <div class="card-container">
 
     <div id="currentWeather" class="currentWeather"></div>
@@ -471,7 +474,7 @@
 
   <div class="right_container">
     <!-- НЕДЕЛЯ -->
-    <h2 style=" color: #00aeff; font-size: 24pt; line-height: 25pt;">На следующие 7 дней:  </h2>
+    <h2 style=" color: #bdeaff; font-size: 18pt; line-height: 25pt;">На следующие 7 дней:  </h2>
   
     <input type="hidden" #selection>
   
@@ -509,8 +512,8 @@
 
 
 
-
-  <!-- Links -->
+  <!-- Footer -->
+  <footer>
     <!-- Resources -->
     <h2>Наши источники:</h2>
     <p>API используемые в данном проекте:</p>
@@ -519,32 +522,36 @@
   
       <a class="card card-small" target="_blank" rel="noopener" href="https://open-meteo.com/"> 
         
-        <img src="https://i.imgur.com/ls4yrI6.png" width="90" style="padding: 0pt; margin-top: 30pt;">
+        <img src="https://i.imgur.com/ls4yrI6.png" width="90" style="padding: 0pt; margin-top: 25pt; filter: invert(1);">
         <!-- <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg> -->
         <span>Open-Metio</span>
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        <svg class="material-icons"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+      </a>
+      
+      <a class="card card-small" target="_blank" rel="noopener" href="https://opencagedata.com/">
+        <img src="http://i.imgur.com/Y4nXm6k.png" width="90" style="padding: 5pt; margin-top: -5pt; filter: invert(1);">
+        <span>Geocoder</span>
+        <svg class="material-icons"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+
+      </a>
+
+
+      <a class="card card-small" target="_blank" rel="noopener" href="https://ipinfo.io/developers">
+        <img src="http://i.imgur.com/wLrpOER.png" width="60" style="padding: 0pt; margin-top: -5pt; filter: invert(1);">
+        <span>IPinfo</span>
+        <svg class="material-icons"  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+
       </a>
   
-      <a class="card card-small" target="_blank" rel="noopener" href="https://yandex.ru/dev/weather/">
-        <img src="https://cdn-irec.r-99.com/sites/default/files/product-images/1179053/M63xFPfsFb5w9Fmx2mj9dg.png" width="50" style="padding: 5pt;">
-        <!-- <svg xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px" width="21.813" height="23.453" viewBox="0 0 179.2 192.7"><path fill="#ffa726" d="M89.4 0 0 32l13.5 118.4 75.9 42.3 76-42.3L179.2 32 89.4 0z"/><path fill="#fb8c00" d="M89.4 0v192.7l76-42.3L179.2 32 89.4 0z"/><path fill="#ffe0b2" d="m102.9 146.3-63.3-30.5 36.3-22.4 63.7 30.6-36.7 22.3z"/><path fill="#fff3e0" d="M102.9 122.8 39.6 92.2l36.3-22.3 63.7 30.6-36.7 22.3z"/><path fill="#fff" d="M102.9 99.3 39.6 68.7l36.3-22.4 63.7 30.6-36.7 22.4z"/></svg> -->
-        <span>Яндекс.Погода</span>
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-      </a>
-
-
   
-  
-    </div>
-  <div class="card-container">
-    //Здесь будут ссылки на гитхаб-проект и мобилку
+    </div >
+    <!-- <div class="card-container">
 
-  </div>
+    </div> -->
 
-  <!-- Footer -->
-  <footer>
+
       Понравилось приложение?&nbsp;
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener"> Можете помочь нам нематериально. </a>
+      <a href="https://github.com/Pacifica123/web_part" target="_blank" rel="noopener"> Можете помочь нам нематериально. </a>
 
   </footer>
 
