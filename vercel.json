@@ -1,8 +1,29 @@
 {
-    "rewrites": [
-      { "source": "/polls/get-weather", "destination": "https://pacificaprogram.pythonanywhere.com/polls/get-weather" },
-      { "source": "/polls/get-weather-week", "destination": "https://pacificaprogram.pythonanywhere.com/polls/get-weather-week" },
-      { "source": "/(.*)", "destination": "/index.html" }
-    ]
+    "version": 2,
+    "buildCommands": [
+      "cd . && npm install",
+      "npm run build",
+      "cd .next && npm run start"
+    ],
+    "analyze": false,
+    "optimize": false,
+    "minify": false,
+    "env": {
+      "NEXT_PUBLIC_PATH_SEGMENT_BASE": "web_part/"
+    },
+    "assets": [
+      "src/favicon.ico",
+      "src/assets"
+    ],
+    "extraAssets": [
+      "dist/**/*.{js,css}"
+    ],
+    "serverRuntimeConfigs": {
+      "next.config.js": {
+        "publicRuntimeConfig": {
+          "path": "/web_part/"
+        }
+      }
+    }
 }
   
