@@ -22,7 +22,16 @@
         ]
       },
       {
-        "source": "/web_part/(.*)\\.js",
+        "source": "/web_part/(.*)",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/javascript"
+          }
+        ]
+      },
+      {
+        "source": "/src/assets/js/(.*)\\.js",
         "headers": [
           {
             "key": "Content-Type",
@@ -36,15 +45,6 @@
           {
             "key": "Content-Type",
             "value": "text/css"
-          }
-        ]
-      },
-      {
-        "source": "/src/assets/js/(.*)\\.js",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "application/javascript"
           }
         ]
       },
