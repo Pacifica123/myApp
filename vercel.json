@@ -1,27 +1,8 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "angular.json",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "dist/my-app"
-        }
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*).(js|ico|json)",
-        "dest": "/$1.$2"
-      },
-      {
-        "src": "/assets/(.*)",
-        "dest": "/src/assets/$1"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/index.html"
-      }
+    "rewrites": [
+      { "source": "/polls/get-weather", "destination": "https://pacificaprogram.pythonanywhere.com/polls/get-weather" },
+      { "source": "/polls/get-weather-week", "destination": "https://pacificaprogram.pythonanywhere.com/polls/get-weather-week" },
+      { "source": "/(.*)", "destination": "/index.html" }
     ]
-  }
+}
   
