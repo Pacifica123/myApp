@@ -5,36 +5,22 @@
         "src": "angular.json",
         "use": "@vercel/static-build",
         "config": {
-          "distDir": "dist/my-app",
-          "outputDir": "/public",
-          "routes": {
-            "/**": "index.html"
-          }
+          "distDir": "dist/my-app"
         }
       }
     ],
     "routes": [
       {
-        "src": "/(.*).(js|css|png|jpg|jpeg|gif|ico|svg)",
-        "dest": "/public/$1.$2",
-        "headers": {
-          "Cache-Control": "public, max-age=31536000, immutable"
-        }
+        "src": "/(.*).(js|ico|json)",
+        "dest": "/$1.$2"
       },
       {
-        "src": "/(.*).(html|xml|txt)",
-        "dest": "/public/$1.$2",
-        "headers": {
-          "Cache-Control": "public, max-age=0, must-revalidate"
-        }
-      },
-      {
-        "src": "/api/(.*)",
-        "dest": "https://pacificaprogram.pythonanywhere.com/api/$1"
+        "src": "/assets/(.*)",
+        "dest": "/src/assets/$1"
       },
       {
         "src": "/(.*)",
-        "dest": "/public/index.html"
+        "dest": "/index.html"
       }
     ]
   }
