@@ -40,7 +40,7 @@
         ]
       },
       {
-        "source": "/src/assets/js/(.*)\\.js",
+        "source": "/src/assets/js/(.*)",
         "headers": [
           {
             "key": "Content-Type",
