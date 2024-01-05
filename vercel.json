@@ -1,16 +1,7 @@
 {
     "version": 2,
-    "buildCommands": [
-      "cd . && npm install",
-      "npm run build",
-      "cd .next && npm run start"
-    ],
-    "analyze": false,
-    "optimize": false,
-    "minify": false,
-    "env": {
-      "NEXT_PUBLIC_PATH_SEGMENT_BASE": "web_part/"
-    },
+    "build": "npm run build",
+    "start": "npm run start",
     "assets": [
       "src/favicon.ico",
       "src/assets"
@@ -25,5 +16,5 @@
         }
       }
     }
-}
+  }
   
