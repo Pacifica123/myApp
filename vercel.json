@@ -1,7 +1,7 @@
 {
     "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
     "headers": [
-
+    
       {
         "source": "/web_part/(.*)\\.js",
         "headers": [
@@ -42,7 +42,7 @@
         ]
       },
       {
-        "source": "/main.js",
+        "source": "src/assets/js/main.js",
         "headers": [
           {
             "key": "Content-Type",
