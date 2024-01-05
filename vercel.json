@@ -1,25 +1,5 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
     "headers": [
-    
-      {
-        "source": "/web_part/(.*)\\.js",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "text/javascript"
-          }
-        ]
-      },
-      {
-        "source": "/web_part/(.*)\\.css",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "text/css"
-          }
-        ]
-      },
       {
         "source": "/assets/(.*)",
         "headers": [
@@ -42,13 +22,47 @@
         ]
       },
       {
-        "source": "src/assets/js/main.js",
+        "source": "/web_part/(.*)\\.js",
         "headers": [
           {
             "key": "Content-Type",
-            "value": "text/javascript"
+            "value": "application/javascript"
+          }
+        ]
+      },
+      {
+        "source": "/web_part/(.*)\\.css",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "text/css"
+          }
+        ]
+      },
+      {
+        "source": "/src/assets/js/(.*)\\.js",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/javascript"
+          }
+        ]
+      },
+      {
+        "source": "/(.*)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=0, must-revalidate"
           }
         ]
       }
+    ],
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+      }
     ]
   }
+  
