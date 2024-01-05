@@ -2,18 +2,12 @@
   "name": "my-app",
   "version": "0.0.0",
   "scripts": {
-    "postbuild": "ng build && ng serve --configuration production --port 8080",
-    "start": "ng serve --configuration development --port 4200",
-    "serve": "ng serve",
+    "ng": "ng",
+    "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
-    "e2e": "ng e2e",
-    "lint": "ng lint",
-    "fix": "ng lint --fix",
-    "prestart": "ng serve --configuration development --watch-dir src && npx tsc:watch",
-    "prebuild": "ng build --watch-dir src",
-    "dev": "concurrently \"npm run build\" \"npm run start\""
-  },  
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^17.0.8",
