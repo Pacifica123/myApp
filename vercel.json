@@ -1,15 +1,7 @@
 {
     "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
     "headers": [
-      {
-        "source": "/api/(.*)",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
-          }
-        ]
-      },
+
       {
         "source": "/web_part/(.*)\\.js",
         "headers": [
@@ -46,6 +38,15 @@
           {
             "key": "Access-Control-Allow-Headers",
             "value": "Origin, X-Requested-With, Content-Type, Accept"
+          }
+        ]
+      },
+      {
+        "source": "/main.js",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "text/javascript"
           }
         ]
       }
