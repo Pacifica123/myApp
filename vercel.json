@@ -1,8 +1,34 @@
 {
-    "rewrites": [
-      { "source": "/polls/get-weather", "destination": "https://pacificaprogram.pythonanywhere.com/polls/get-weather" },
-      { "source": "/polls/get-weather-week", "destination": "https://pacificaprogram.pythonanywhere.com/polls/get-weather-week" },
-      { "source": "/(.*)", "destination": "/web_part/index.html" }
+    "version": 2,
+    "builds": [
+      {
+        "src": "angular.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "dist/my-app"
+        }
+      },
+      {
+        "src": "backend/**",
+        "use": "@vercel/python",
+        "config": {
+          "maxLambdaSize": "15mb"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/polls/get-weather/(.*)",
+        "dest": "https://pacificaprogram.pythonanywhere.com/polls/get-weather/:1"
+      },
+      {
+        "src": "/polls/get-weather-week/(.*)",
+        "dest": "https://pacificaprogram.pythonanywhere.com/polls/get-weather-week/:1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "dist/my-app/$1"
+      }
     ]
   }
   
