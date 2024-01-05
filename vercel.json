@@ -40,7 +40,7 @@
         ]
       },
       {
-        "source": "/src/assets/js/(.*)",
+        "source": "/src/assets/js/(.*)\\.js",
         "headers": [
           {
             "key": "Content-Type",
@@ -61,7 +61,7 @@
     "rewrites": [
       {
         "source": "/(.*)",
-        "destination": "/index.html"
+        "destination": "/web_part/index.html"
       }
     ]
   }
