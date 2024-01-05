@@ -11,6 +11,24 @@
         ]
       },
       {
+        "source": "/web_part/(.*)\\.js",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "text/javascript"
+          }
+        ]
+      },
+      {
+        "source": "/web_part/(.*)\\.css",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "text/css"
+          }
+        ]
+      },
+      {
         "source": "/assets/(.*)",
         "headers": [
           {
